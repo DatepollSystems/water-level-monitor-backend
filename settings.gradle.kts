@@ -1,1 +1,1 @@
-rootProject.name = "backend"
+rootProject.name = "water-level-monitor"
