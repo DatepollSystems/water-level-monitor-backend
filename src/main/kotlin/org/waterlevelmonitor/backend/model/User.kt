@@ -1,10 +1,6 @@
 package org.waterlevelmonitor.backend.model
 
-import com.fasterxml.jackson.annotation.JsonIgnore
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
+import javax.persistence.*
 import javax.validation.constraints.NotBlank
 
 @Entity
@@ -20,5 +16,8 @@ data class User (
 
     @NotBlank
     @Column(nullable = false)
-    var password: String
+    var password: String,
+
+    @Version
+    val version: Long?
 )
