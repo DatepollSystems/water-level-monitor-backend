@@ -3,6 +3,7 @@ package org.waterlevelmonitor.backend.model
 import javax.persistence.*
 import javax.validation.constraints.Size
 
+@Table(name = "rivers")
 @Entity
 data class River(
         @Id
@@ -18,7 +19,7 @@ data class River(
         val locations: List<Location>,
 
         @Version
-        val version: Long?
+        val version: Long? = null
 )
 
 data class RiverDto(

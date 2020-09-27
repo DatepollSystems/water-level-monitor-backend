@@ -12,7 +12,7 @@ import org.waterlevelmonitor.backend.model.River
 @RequestMapping("/rivers")
 class RiverService {
 
-    private val log = LoggerFactory.getLogger(RiverService::class.java);
+    private val log = LoggerFactory.getLogger(RiverService::class.java)
 
     @Autowired
     private lateinit var riverRepo: RiverRepository

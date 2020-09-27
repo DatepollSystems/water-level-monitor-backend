@@ -6,5 +6,5 @@ import org.waterlevelmonitor.backend.model.River
 
 interface RiverRepository: JpaRepository<River, Long> {
 
-    fun getRiverById(id: Long): River
+    fun getRiverById(id: Long): River?
 }

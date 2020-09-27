@@ -3,6 +3,7 @@ package org.waterlevelmonitor.backend.model
 import javax.persistence.*
 import javax.validation.constraints.NotBlank
 
+@Table(name = "users")
 @Entity
 data class User (
 
@@ -19,5 +20,5 @@ data class User (
     var password: String,
 
     @Version
-    val version: Long?
+    val version: Long? = null
 )

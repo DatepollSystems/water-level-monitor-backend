@@ -4,6 +4,7 @@ import com.sun.istack.NotNull
 import java.util.*
 import javax.persistence.*
 
+@Table(name = "waterLevels")
 @Entity
 data class WaterLevel(
 
