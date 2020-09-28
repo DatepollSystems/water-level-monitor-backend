@@ -19,7 +19,7 @@ class WebSecurityConfig(
 
         http?.let {
             http.cors().and().csrf().disable().authorizeRequests()
-                    .antMatchers(HttpMethod.GET, "/rivers", "/locations", "/waterlevels").permitAll()
+                    .antMatchers(HttpMethod.GET, "/rivers/**", "/locations/**", "/waterlevels/**").permitAll()
                     .antMatchers("/login").permitAll()
                     //.antMatchers(HttpMethod.POST, "/users/signup").permitAll()
                     .anyRequest().authenticated()
