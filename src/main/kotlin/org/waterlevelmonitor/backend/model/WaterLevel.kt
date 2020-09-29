@@ -2,6 +2,7 @@ package org.waterlevelmonitor.backend.model
 
 import com.sun.istack.NotNull
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.*
 
@@ -47,3 +48,10 @@ data class WaterDateLevelDto(
         val date: LocalDate,
         val level: Float
 )
+
+data class WaterDateTimeLevelDto(
+        val date: LocalDateTime,
+        val level: Float
+)
+
+

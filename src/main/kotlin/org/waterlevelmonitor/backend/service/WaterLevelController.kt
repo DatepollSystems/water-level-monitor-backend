@@ -4,9 +4,12 @@ import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.*
 import org.waterlevelmonitor.backend.domain.WaterLevelRepository
 import org.waterlevelmonitor.backend.model.WaterDateLevelDto
+import org.waterlevelmonitor.backend.model.WaterDateTimeLevelDto
 import org.waterlevelmonitor.backend.model.WaterLevelDto
 import org.waterlevelmonitor.backend.utils.DateUtil
+import java.time.Instant
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.*
 import kotlin.collections.HashMap
@@ -50,14 +53,38 @@ class WaterLevelController(private val waterLevelRepository: WaterLevelRepositor
                     ?: 0F))
         }
 
-
         return list
     }
 
-    @GetMapping("/avgLastTwentyFourHours/{locationId}")
-    fun avgLastTwentyFourHours(@PathVariable("locationId") locationId: Long){
-        TODO()
+    @GetMapping("/avgLastTwentyFourHoursPerHour/{locationId}")
+    fun avgLastTwentyFourHoursPerHour(@PathVariable("locationId") locationId: Long): List<WaterDateTimeLevelDto>{
+        val list = ArrayList<WaterDateTimeLevelDto>()
+        val current = LocalDateTime.now()
+
+        for(i in 0..23) {
+            var dateTime = current.minusHours(i.toLong())
+            dateTime = dateTime.withMinute(0)
+            dateTime = dateTime.withSecond(0)
+            list.add(WaterDateTimeLevelDto(dateTime, getAvgOfHour(dateTime, locationId)))
+        }
+        return list
     }
+
+    private fun getAvgOfHour(dateTime: LocalDateTime, locationId: Long): Float {
+        var start = LocalDateTime.from(dateTime)
+        start = start.withMinute(0)
+        start = start.withSecond(0)
+        val sDate = Date.from(start.atZone(ZoneId.systemDefault()).toInstant())
+        logger.info("sdate: $sDate")
+        var end = LocalDateTime.from(dateTime)
+        end = end.withMinute(59)
+        end = end.withSecond(59)
+        val eDate = Date.from(end.atZone(ZoneId.systemDefault()).toInstant())
+        logger.info("eDate: $eDate")
+
+        return waterLevelRepository.getAvgWaterLevelBetweenDates(locationId, sDate , eDate)?: 0F
+    }
+
 
     @GetMapping("/waterLevelsLastHour/{locationId}")
     fun waterLevelsLastHour(@PathVariable("locationId") locationId: Long){

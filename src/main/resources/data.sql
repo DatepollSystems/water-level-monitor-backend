@@ -18,3 +18,5 @@ INSERT INTO water_levels (id, level, timestamp, location_id) VALUES (9, 123,'202
 INSERT INTO water_levels (id, level, timestamp, location_id) VALUES (10, 31,'2020-09-24 10:10:10', 1)
 INSERT INTO water_levels (id, level, timestamp, location_id) VALUES (11, 38,'2020-09-25 10:10:10', 1)
 INSERT INTO water_levels (id, level, timestamp, location_id) VALUES (12, 55,'2020-09-26 10:10:10', 1)
+INSERT INTO water_levels (id, level, timestamp, location_id) VALUES (13, 55,'2020-09-29 10:10:10', 1)
+INSERT INTO water_levels (id, level, timestamp, location_id) VALUES (14, 100,'2020-09-29 10:59:10', 1)
