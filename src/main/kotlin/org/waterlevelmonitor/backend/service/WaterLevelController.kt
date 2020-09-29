@@ -3,11 +3,14 @@ package org.waterlevelmonitor.backend.service
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.*
 import org.waterlevelmonitor.backend.domain.WaterLevelRepository
+import org.waterlevelmonitor.backend.model.WaterDateLevelDto
+import org.waterlevelmonitor.backend.model.WaterLevelDto
 import org.waterlevelmonitor.backend.utils.DateUtil
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.*
 import kotlin.collections.HashMap
+import kotlin.collections.LinkedHashMap
 
 
 @RestController
@@ -31,13 +34,33 @@ class WaterLevelController(private val waterLevelRepository: WaterLevelRepositor
     }
 
     @GetMapping("/avgLastSevenDays/{locationId}")
-    fun avgLastSevenDays(@PathVariable("locationId") locationId: Long){
+    fun avgLastSevenDays(@PathVariable("locationId") locationId: Long): List<WaterDateLevelDto> {
         val today = LocalDate.now()
-        TODO()
+        val list = ArrayList<WaterDateLevelDto>()
 
+        for (i in 6 downTo 0) {
+            logger.info(i.toString())
+            val tmpDate = today.minusDays(i.toLong())
+            val tmpDateStart = tmpDate.atStartOfDay()
+            val tmpDateEnd = tmpDate.atTime(23, 59, 59)
+
+            list.add(WaterDateLevelDto(tmpDate,waterLevelRepository.getAvgWaterLevelBetweenDates(locationId,
+                    Date.from(tmpDateStart.atZone(ZoneId.systemDefault()).toInstant()),
+                    Date.from(tmpDateEnd.atZone(ZoneId.systemDefault()).toInstant()))
+                    ?: 0F))
+        }
+
+
+        return list
     }
 
-    private fun getLastSevenDaysAsList(): List<LocalDate>{
+    @GetMapping("/avgLastTwentyFourHours/{locationId}")
+    fun avgLastTwentyFourHours(@PathVariable("locationId") locationId: Long){
+        TODO()
+    }
+
+    @GetMapping("/waterLevelsLastHour/{locationId}")
+    fun waterLevelsLastHour(@PathVariable("locationId") locationId: Long){
         TODO()
     }
 
@@ -50,6 +73,6 @@ class WaterLevelController(private val waterLevelRepository: WaterLevelRepositor
                 locationId = locationId,
                 startDate = sDate,
                 endDate = eDate
-        )?: 0F
+        ) ?: 0F
     }
 }
