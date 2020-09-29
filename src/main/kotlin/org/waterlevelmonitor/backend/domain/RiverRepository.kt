@@ -6,8 +6,5 @@ import org.waterlevelmonitor.backend.model.River
 
 interface RiverRepository: JpaRepository<River, Long> {
 
-    fun getRiverById(id: Long): River
-
-    @Query("select r from River r")
-    fun getAll(): List<River>
+    fun getRiverById(id: Long): River?
 }
