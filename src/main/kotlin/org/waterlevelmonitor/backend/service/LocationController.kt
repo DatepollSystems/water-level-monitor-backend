@@ -11,7 +11,7 @@ import org.waterlevelmonitor.backend.model.LocationDto
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/locations")
+@RequestMapping("/api/v1/locations")
 class LocationController(
         private val locationRepository: LocationRepository,
         private val riverRepository: RiverRepository

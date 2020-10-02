@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*
 import org.waterlevelmonitor.backend.domain.WaterLevelRepository
 import org.waterlevelmonitor.backend.model.WaterDateLevelDto
 import org.waterlevelmonitor.backend.model.WaterDateTimeLevelDto
+import org.waterlevelmonitor.backend.model.WaterLevel
 import org.waterlevelmonitor.backend.model.WaterLevelDto
 import org.waterlevelmonitor.backend.utils.DateUtil
 import java.time.Instant
@@ -17,7 +18,7 @@ import kotlin.collections.LinkedHashMap
 
 
 @RestController
-@RequestMapping("/waterlevels")
+@RequestMapping("/api/v1/waterlevels")
 class WaterLevelController(private val waterLevelRepository: WaterLevelRepository) {
 
     private val logger = LoggerFactory.getLogger(WaterLevelController::class.java)
@@ -85,10 +86,15 @@ class WaterLevelController(private val waterLevelRepository: WaterLevelRepositor
         return waterLevelRepository.getAvgWaterLevelBetweenDates(locationId, sDate , eDate)?: 0F
     }
 
-
     @GetMapping("/waterLevelsLastHour/{locationId}")
-    fun waterLevelsLastHour(@PathVariable("locationId") locationId: Long){
-        TODO()
+    fun waterLevelsLastHour(@PathVariable("locationId") locationId: Long): List<WaterLevel> {
+        val current = LocalDateTime.now()
+        val start = current.minusHours(1)
+        return waterLevelRepository.getAllWaterLevelsBetweenDateTimes(
+                locationId,
+                Date.from(start.atZone(ZoneId.systemDefault()).toInstant()),
+                Date.from(current.atZone(ZoneId.systemDefault()).toInstant())
+        )
     }
 
     private fun getAvgForMonth(locationId: Long, year: Short, month: Short): Float {

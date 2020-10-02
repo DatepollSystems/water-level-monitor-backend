@@ -16,4 +16,11 @@ interface WaterLevelRepository : JpaRepository<WaterLevel, Long> {
             @Param("lid") locationId: Long,
             @Param("sDate") startDate: Date,
             @Param("eDate") endDate: Date): Float?
+
+    @Query("select w from WaterLevel w where w.location.id = :lid and w.timestamp between :sTime and :eTime")
+    fun getAllWaterLevelsBetweenDateTimes(
+            @Param("lid") locationId: Long,
+            @Param("sTime") startDate: Date,
+            @Param("eTime") endDate: Date
+    ): List<WaterLevel>
 }
