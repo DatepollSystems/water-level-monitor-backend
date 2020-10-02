@@ -1,5 +1,6 @@
 package org.waterlevelmonitor.backend.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.sun.istack.NotNull
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -22,10 +23,12 @@ data class WaterLevel(
         @Column(name = "timestamp")
         val timestamp: Date,
 
+        @JsonIgnore
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name ="location_id")
         val location: Location?,
 
+        @JsonIgnore
         @Version
         val version: Long? = null
 )
