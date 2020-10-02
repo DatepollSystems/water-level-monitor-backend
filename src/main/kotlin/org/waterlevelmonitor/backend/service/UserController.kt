@@ -10,12 +10,12 @@ import org.waterlevelmonitor.backend.domain.UserRepository
 import org.waterlevelmonitor.backend.model.User
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/v1/users")
 class UserController(val bCryptPasswordEncoder: BCryptPasswordEncoder, val userRepository: UserRepository) {
 
-    @PostMapping("/signup")
+    /**@PostMapping("/signup")
     fun signup(@Validated @RequestBody user: User){
         user.password = bCryptPasswordEncoder.encode(user.password)
         userRepository.save(user)
-    }
+    }**/
 }

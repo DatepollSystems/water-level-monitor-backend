@@ -1,5 +1,6 @@
 package org.waterlevelmonitor.backend.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 import javax.validation.constraints.Size
 
@@ -14,10 +15,12 @@ data class River(
         @Size(min = 1, max = 100)
         var name: String,
 
+        @JsonIgnore
         @OneToMany
         @JoinColumn(name = "river_id")
         val locations: List<Location>,
 
+        @JsonIgnore
         @Version
         val version: Long? = null
 )

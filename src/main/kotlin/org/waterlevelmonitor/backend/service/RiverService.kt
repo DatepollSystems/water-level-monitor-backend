@@ -9,7 +9,7 @@ import org.waterlevelmonitor.backend.domain.RiverRepository
 import org.waterlevelmonitor.backend.model.River
 
 @RestController
-@RequestMapping("/rivers")
+@RequestMapping("/api/v1/rivers")
 class RiverService {
 
     private val log = LoggerFactory.getLogger(RiverService::class.java)
@@ -18,7 +18,7 @@ class RiverService {
     private lateinit var riverRepo: RiverRepository
 
     @GetMapping
-    fun getAllRivers(): List<River>{
+    fun getAllRivers(): List<River> {
         return riverRepo.findAll()
     }
 

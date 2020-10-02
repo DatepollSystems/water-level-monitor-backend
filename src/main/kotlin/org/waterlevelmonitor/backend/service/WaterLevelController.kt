@@ -18,7 +18,7 @@ import kotlin.collections.LinkedHashMap
 
 
 @RestController
-@RequestMapping("/waterlevels")
+@RequestMapping("/api/v1/waterlevels")
 class WaterLevelController(private val waterLevelRepository: WaterLevelRepository) {
 
     private val logger = LoggerFactory.getLogger(WaterLevelController::class.java)
