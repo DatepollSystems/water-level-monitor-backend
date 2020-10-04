@@ -18,7 +18,7 @@ data class River(
         @JsonIgnore
         @OneToMany
         @JoinColumn(name = "river_id")
-        val locations: List<Location>,
+        val locations: List<Location> = ArrayList(),
 
         @JsonIgnore
         @Version
