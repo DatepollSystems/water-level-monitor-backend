@@ -20,9 +20,9 @@ class LocationController(
 
     private val logger: Logger = LoggerFactory.getLogger(LocationController::class.java)
 
-    @GetMapping
-    fun getAllLocationsByRiverId(@RequestParam riverId: Long) {
-        logger.debug("Handling request for locations with river id: $riverId")
+    @GetMapping("/{riverId}")
+    fun getAllLocationsByRiverId(@PathVariable riverId: Long): List<Location> {
+        return locationRepository.getAllByRiverId(riverId)
     }
 
     @PostMapping
