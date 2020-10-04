@@ -22,7 +22,7 @@ class AuthenticationFilter(
 
     init {
         setAuthenticationManager(authenticationManager)
-        setFilterProcessesUrl("/login")
+        setFilterProcessesUrl("/api/v1/login")
     }
 
     override fun attemptAuthentication(request: HttpServletRequest?, response: HttpServletResponse?): Authentication {
