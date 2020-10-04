@@ -10,6 +10,7 @@ import org.waterlevelmonitor.backend.model.Location
 import org.waterlevelmonitor.backend.model.LocationDto
 import javax.validation.Valid
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/locations")
 class LocationController(

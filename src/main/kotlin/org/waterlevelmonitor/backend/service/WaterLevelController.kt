@@ -6,17 +6,14 @@ import org.waterlevelmonitor.backend.domain.WaterLevelRepository
 import org.waterlevelmonitor.backend.model.WaterDateLevelDto
 import org.waterlevelmonitor.backend.model.WaterDateTimeLevelDto
 import org.waterlevelmonitor.backend.model.WaterLevel
-import org.waterlevelmonitor.backend.model.WaterLevelDto
 import org.waterlevelmonitor.backend.utils.DateUtil
-import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.*
 import kotlin.collections.HashMap
-import kotlin.collections.LinkedHashMap
 
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/waterlevels")
 class WaterLevelController(private val waterLevelRepository: WaterLevelRepository) {

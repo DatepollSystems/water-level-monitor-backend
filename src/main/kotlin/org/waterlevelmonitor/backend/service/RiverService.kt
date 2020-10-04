@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*
 import org.waterlevelmonitor.backend.domain.RiverRepository
 import org.waterlevelmonitor.backend.model.River
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/rivers")
 class RiverService {
