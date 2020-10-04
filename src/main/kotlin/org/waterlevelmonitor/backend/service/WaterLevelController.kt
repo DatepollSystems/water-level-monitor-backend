@@ -1,11 +1,12 @@
 package org.waterlevelmonitor.backend.service
 
 import org.slf4j.LoggerFactory
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
+import org.waterlevelmonitor.backend.domain.LocationRepository
 import org.waterlevelmonitor.backend.domain.WaterLevelRepository
-import org.waterlevelmonitor.backend.model.WaterDateLevelDto
-import org.waterlevelmonitor.backend.model.WaterDateTimeLevelDto
-import org.waterlevelmonitor.backend.model.WaterLevel
+import org.waterlevelmonitor.backend.exceptions.LocationNotFoundException
+import org.waterlevelmonitor.backend.model.*
 import org.waterlevelmonitor.backend.utils.DateUtil
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -16,7 +17,10 @@ import kotlin.collections.HashMap
 @CrossOrigin
 @RestController
 @RequestMapping("/api/v1/waterlevels")
-class WaterLevelController(private val waterLevelRepository: WaterLevelRepository) {
+class WaterLevelController(
+        private val waterLevelRepository: WaterLevelRepository,
+        private val locationRepository: LocationRepository
+) {
 
     private val logger = LoggerFactory.getLogger(WaterLevelController::class.java)
 
@@ -104,5 +108,12 @@ class WaterLevelController(private val waterLevelRepository: WaterLevelRepositor
                 startDate = sDate,
                 endDate = eDate
         ) ?: 0F
+    }
+
+    @PostMapping
+    fun addWaterLevelDetection(@Validated @RequestBody wl: WaterLevelDto){
+        val loc: Location = locationRepository.getLocationById(wl.locationId) ?: throw LocationNotFoundException()
+        val waterlevel = wl.toDbModel(location = loc)
+        waterLevelRepository.save(waterlevel)
     }
 }

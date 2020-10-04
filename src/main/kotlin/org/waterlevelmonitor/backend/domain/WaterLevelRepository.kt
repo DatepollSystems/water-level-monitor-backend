@@ -23,4 +23,7 @@ interface WaterLevelRepository : JpaRepository<WaterLevel, Long> {
             @Param("sTime") startDate: Date,
             @Param("eTime") endDate: Date
     ): List<WaterLevel>
+
+    @Query("select wl from WaterLevel wl where wl.location.id = :lid")
+    fun getAllByLocationId(@Param("lid") l: Long): List<WaterLevel>
 }

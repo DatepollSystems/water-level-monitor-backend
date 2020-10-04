@@ -7,8 +7,7 @@ import org.waterlevelmonitor.backend.model.Location
 
 interface LocationRepository : JpaRepository<Location, Long>{
 
-    @EntityGraph("locationWithWaterLevels", type = EntityGraph.EntityGraphType.FETCH)
-    fun getLocationById(id: Long): Location
+    fun getLocationById(id: Long): Location?
 
     @Query("select l from Location l where l.river.id = :riverId")
     fun getAllByRiverId(riverId: Long): List<Location>
