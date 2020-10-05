@@ -28,11 +28,12 @@ class WaterLevelController(
     fun avgAllMonths(
             @RequestParam("year") year: Short,
             @RequestParam("location_id") locationId: Long
-    ): Map<Int, Float> {
-        val map = HashMap<Int, Float>()
+    ): Map<String, Float> {
+        val map = HashMap<String, Float>()
+        val monthArray = arrayListOf("JAN", "FEB","MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OKT", "NOV", "DEC")
 
         for (i in 1..12) {
-            map[i] = getAvgForMonth(locationId, year, i.toShort())
+            map[monthArray[i-1]] = getAvgForMonth(locationId, year, i.toShort())
         }
 
         return map
