@@ -41,8 +41,8 @@ class LocationController(
         locationRepository.save(location)
     }
 
-    @GetMapping("/getAllWaterlevels/{loc_id}")
-    fun getAllWl(@PathVariable("loc_id")locId: Long): List<WaterLevel>{
-        return waterLevelRepository.getAllByLocationId(locId)
-    }
+    //@GetMapping("/getAllWaterlevels/{loc_id}")
+    //fun getAllWl(@PathVariable("loc_id")locId: Long): List<WaterLevel>{
+    //    return waterLevelRepository.getAllByLocationId(locId)
+    //}
 }
