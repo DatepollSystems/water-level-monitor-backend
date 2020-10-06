@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*
 import org.waterlevelmonitor.backend.domain.LocationRepository
 import org.waterlevelmonitor.backend.domain.WaterLevelRepository
 import org.waterlevelmonitor.backend.exceptions.LocationNotFoundException
+import org.waterlevelmonitor.backend.exceptions.MaxAmountOfMeasurementsReachedException
+import org.waterlevelmonitor.backend.exceptions.OutOfToleranceException
 import org.waterlevelmonitor.backend.model.*
 import org.waterlevelmonitor.backend.utils.DateUtil
 import java.time.LocalDate
@@ -30,10 +32,10 @@ class WaterLevelController(
             @RequestParam("location_id") locationId: Long
     ): Map<String, Float> {
         val map = HashMap<String, Float>()
-        val monthArray = arrayListOf("JAN", "FEB","MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OKT", "NOV", "DEC")
+        val monthArray = arrayListOf("JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OKT", "NOV", "DEC")
 
         for (i in 1..12) {
-            map[monthArray[i-1]] = getAvgForMonth(locationId, year, i.toShort())
+            map[monthArray[i - 1]] = getAvgForMonth(locationId, year, i.toShort())
         }
 
         return map
@@ -50,7 +52,7 @@ class WaterLevelController(
             val tmpDateStart = tmpDate.atStartOfDay()
             val tmpDateEnd = tmpDate.atTime(23, 59, 59)
 
-            list.add(WaterDateLevelDto(tmpDate,waterLevelRepository.getAvgWaterLevelBetweenDates(locationId,
+            list.add(WaterDateLevelDto(tmpDate, waterLevelRepository.getAvgWaterLevelBetweenDates(locationId,
                     Date.from(tmpDateStart.atZone(ZoneId.systemDefault()).toInstant()),
                     Date.from(tmpDateEnd.atZone(ZoneId.systemDefault()).toInstant()))
                     ?: 0F))
@@ -60,11 +62,11 @@ class WaterLevelController(
     }
 
     @GetMapping("/avgLastTwentyFourHoursPerHour/{locationId}")
-    fun avgLastTwentyFourHoursPerHour(@PathVariable("locationId") locationId: Long): List<WaterDateTimeLevelDto>{
+    fun avgLastTwentyFourHoursPerHour(@PathVariable("locationId") locationId: Long): List<WaterDateTimeLevelDto> {
         val list = ArrayList<WaterDateTimeLevelDto>()
         val current = LocalDateTime.now()
 
-        for(i in 0..23) {
+        for (i in 0..23) {
             var dateTime = current.minusHours(i.toLong())
             dateTime = dateTime.withMinute(0)
             dateTime = dateTime.withSecond(0)
@@ -85,7 +87,7 @@ class WaterLevelController(
         val eDate = Date.from(end.atZone(ZoneId.systemDefault()).toInstant())
         logger.info("eDate: $eDate")
 
-        return waterLevelRepository.getAvgWaterLevelBetweenDates(locationId, sDate , eDate)?: 0F
+        return waterLevelRepository.getAvgWaterLevelBetweenDates(locationId, sDate, eDate) ?: 0F
     }
 
     @GetMapping("/waterLevelsLastHour/{locationId}")
@@ -112,9 +114,35 @@ class WaterLevelController(
     }
 
     @PostMapping
-    fun addWaterLevelDetection(@Validated @RequestBody wl: WaterLevelDto){
+    fun addWaterLevelDetection(@Validated @RequestBody wl: WaterLevelDto) {
         val loc: Location = locationRepository.getLocationById(wl.locationId) ?: throw LocationNotFoundException()
         val waterlevel = wl.toDbModel(location = loc)
-        waterLevelRepository.save(waterlevel)
+
+        val currentStartMin = LocalDateTime.now()
+        val currentEndMin = LocalDateTime.from(currentStartMin)
+        currentStartMin.withSecond(0)
+        currentEndMin.withSecond(59)
+        logger.info("Current Time: $currentStartMin")
+
+        val res = waterLevelRepository.getAllWaterLevelsBetweenDateTimes(
+                loc.id,
+                Date.from(currentStartMin.atZone(ZoneId.systemDefault()).toInstant()),
+                Date.from(currentEndMin.atZone(ZoneId.systemDefault()).toInstant())
+        )
+
+        if (res.size <= 2) {
+            var valid = true
+            for (i in res) {
+                val diff = i.level - waterlevel.level
+                if (diff > 10 && diff < -10)
+                    valid = false
+            }
+            if (valid)
+                waterLevelRepository.save(waterlevel)
+            else
+                throw OutOfToleranceException()
+        } else {
+            throw MaxAmountOfMeasurementsReachedException()
+        }
     }
 }
