@@ -118,10 +118,8 @@ class WaterLevelController(
         val loc: Location = locationRepository.getLocationById(wl.locationId) ?: throw LocationNotFoundException()
         val waterlevel = wl.toDbModel(location = loc)
 
-        val currentStartMin = LocalDateTime.now()
-        val currentEndMin = LocalDateTime.from(currentStartMin)
-        currentStartMin.withSecond(0)
-        currentEndMin.withSecond(59)
+        val currentStartMin = LocalDateTime.now().plusHours(2).withSecond(0)
+        val currentEndMin = LocalDateTime.from(currentStartMin).withSecond(59)
         logger.info("Current Time: $currentStartMin")
 
         val res = waterLevelRepository.getAllWaterLevelsBetweenDateTimes(
