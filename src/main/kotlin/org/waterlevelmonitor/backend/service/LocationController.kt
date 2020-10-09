@@ -17,7 +17,6 @@ import javax.validation.Valid
 @RequestMapping("/api/v1/locations")
 class LocationController(
         private val locationRepository: LocationRepository,
-        private val waterLevelRepository: WaterLevelRepository,
         private val riverRepository: RiverRepository
 ) {
 
