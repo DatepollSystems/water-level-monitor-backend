@@ -22,10 +22,12 @@ data class Location(
         @Column(length = 100)
         var name: String,
 
+        @JsonIgnore
         @ManyToOne
         @JoinColumn(name = "river_id")
         var river: River,
 
+        @JsonIgnore
         @OneToMany(fetch = FetchType.LAZY)
         @JoinColumn(name = "location_id")
         val waterLevels: List<WaterLevel> = ArrayList(),

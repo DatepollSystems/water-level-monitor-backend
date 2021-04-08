@@ -1,6 +1,7 @@
 package org.waterlevelmonitor.backend.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.sun.istack.NotNull
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -35,7 +36,7 @@ data class WaterLevel(
 
 data class WaterLevelDto(
         val level: Int,
-        val locationId: Long,
+        @JsonProperty("location_id") val locationId: Long,
         val timestamp: Date
 ) {
         fun toDbModel(location: Location): WaterLevel{

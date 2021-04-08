@@ -2,7 +2,6 @@ package org.waterlevelmonitor.backend.exceptions
 
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ResponseStatus
-import java.lang.Exception
 
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-class RiverNotFoundException(msg: String = "River not found") : Exception(msg)
+class NotAuthorizedException: Exception()
