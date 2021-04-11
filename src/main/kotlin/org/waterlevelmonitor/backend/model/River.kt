@@ -1,6 +1,7 @@
 package org.waterlevelmonitor.backend.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import org.springframework.context.annotation.Lazy
 import javax.persistence.*
 import javax.validation.constraints.Size
 
@@ -16,7 +17,7 @@ data class River(
         var name: String,
 
         @JsonIgnore
-        @OneToMany
+        @OneToMany(fetch = FetchType.EAGER)
         @JoinColumn(name = "river_id")
         val locations: List<Location> = ArrayList(),
 

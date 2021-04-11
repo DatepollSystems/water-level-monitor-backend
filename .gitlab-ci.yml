@@ -19,6 +19,8 @@ build:
   stage: build
   tags:
     - shell
+  only:
+    - tags
   before_script:
     - rm -rf ./src/main/resources/application.properties
     - cp ./src/main/resources/application.properties.ci-build ./src/main/resources/application.properties
