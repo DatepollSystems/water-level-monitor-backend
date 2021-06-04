@@ -13,7 +13,7 @@ test:
   script:
     - pwd
     - ls -al
-    - gradle clean test
+    - ./gradle clean test
 
 
 
