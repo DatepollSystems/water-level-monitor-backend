@@ -11,7 +11,7 @@ test:
     - rm -rf ./src/main/resources/application.properties
     - cp ./src/main/resources/application.properties.ci-test ./src/main/resources/application.properties
   script:
-    - gradle test
+    - gradle clean test
 
 
 
