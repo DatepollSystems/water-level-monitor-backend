@@ -13,7 +13,7 @@ test:
     - cp ./src/main/resources/application.properties.ci-test ./src/main/resources/application.properties
   script:
     - ls -al
-    - gradle clean test
+    - gradle test
 
 
 
