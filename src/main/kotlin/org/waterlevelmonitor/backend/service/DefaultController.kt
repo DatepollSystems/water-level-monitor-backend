@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RestController
 
 @CrossOrigin
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 class DefaultController {
 
     @GetMapping
-    fun default(): String { return "v1.0.0" }
+    fun default(): String { return "Running WaterLevelMonitor v0.0.2" }
 }

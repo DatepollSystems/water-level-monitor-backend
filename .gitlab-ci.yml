@@ -7,10 +7,12 @@ test:
   stage: test
   tags:
     - shell
+    - gradle
   before_script:
     - rm -rf ./src/main/resources/application.properties
     - cp ./src/main/resources/application.properties.ci-test ./src/main/resources/application.properties
   script:
+    - ls -al
     - gradle test
 
 
@@ -19,6 +21,7 @@ build:
   stage: build
   tags:
     - shell
+    - gradle
   only:
     - tags
   before_script:

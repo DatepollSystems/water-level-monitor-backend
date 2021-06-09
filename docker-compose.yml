@@ -1,0 +1,44 @@
+version: '3.8'
+
+networks:
+  water-level-monitor:
+
+services:
+  water-level-monitor-mysql:
+    image: mysql
+    container_name: water-level-monitor-mysql
+    restart: always
+    volumes:
+      - ./production-db:/var/lib/mysql:z
+    environment:
+      MYSQL_DATABASE: 'waterlevel'
+      MYSQL_USER: 'waterlevel'
+      MYSQL_PASSWORD: 'waterlevel'
+      MYSQL_ROOT_PASSWORD: 'waterlevel'
+    ports:
+      - "3307:3306"
+    networks:
+      - water-level-monitor
+    healthcheck:
+      test: out=$$(mysqladmin ping -h localhost -P 3306 -u root --password=$$(cat $${MYSQL_ROOT_PASSWORD}) 2>&1); echo $$out | grep 'mysqld is alive' || { echo $$out; exit 1; }
+
+  water-level-monitor-backend:
+    image: datepollsystems/water-level-monitor-backend
+    restart: always
+    container_name: water-level-monitor-backend
+    ports:
+      - "8081:8080"
+    depends_on:
+      - water-level-monitor-mysql
+    environment:
+      - DATABASE_HOST=water-level-monitor-mysql
+      - DATABASE_NAME=waterlevel
+      - DATABASE_USER=waterlevel
+      - DATABASE_PASSWORD=waterlevel
+      - DATABASE_PORT=3306
+      - USER_CREATION_ENABLED=true
+      - USER_CREATION_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    volumes:
+      - ./data
+    networks:
+      - water-level-monitor
