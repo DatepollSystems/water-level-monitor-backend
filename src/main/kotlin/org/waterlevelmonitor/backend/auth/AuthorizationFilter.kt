@@ -42,6 +42,4 @@ class AuthorizationFilter(authenticationManager: AuthenticationManager)
         }
         return null
     }
-
-
 }

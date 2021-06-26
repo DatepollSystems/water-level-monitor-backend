@@ -37,9 +37,11 @@ class AuthenticationFilter(
     override fun successfulAuthentication(request: HttpServletRequest?, response: HttpServletResponse?, chain: FilterChain?, authResult: Authentication?) {
         val token = Jwts.builder()
                 .setSubject((authResult!!.principal as User).username)
+                // Expiration necessary?
                 .setExpiration(Date(System.currentTimeMillis() + 864_000_000))
                 .signWith(SignatureAlgorithm.HS512, "SecretKeyToGenJWTs".toByteArray())
                 .compact()
         response!!.addHeader("Authorization", "Bearer $token")
+        // maybe add in body too?
     }
 }

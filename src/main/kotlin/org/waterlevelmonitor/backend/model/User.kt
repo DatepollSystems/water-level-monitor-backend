@@ -19,6 +19,8 @@ data class User(
         @Column(nullable = false)
         var password: String,
 
+        @Column(nullable = false)
+        var role: Role = Role.NONE,
 
         @Version
         val version: Long? = null
@@ -30,6 +32,13 @@ data class UserDto(
         val creationToken: String
 ) {
     fun toDbModel(): User {
-        return User(0, username, password, 0)
+        return User(0, username, password, Role.NONE)
     }
+}
+
+
+enum class Role {
+        ADMIN,
+        ORGANIZATION_ADMIN,
+        NONE
 }

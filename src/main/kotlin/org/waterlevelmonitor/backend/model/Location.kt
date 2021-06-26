@@ -32,6 +32,11 @@ data class Location(
         @JoinColumn(name = "location_id")
         val waterLevels: List<WaterLevel> = ArrayList(),
 
+
+        @ManyToOne
+        @JoinColumn(name = "organization_id")
+        val organizations: Organization,
+
         @JsonIgnore
         @Version
         val version: Long? = null
@@ -43,5 +48,9 @@ data class LocationDto(
 
         @JsonProperty("river_id")
         @NotNull
-        val riverId: Long
+        val riverId: Long,
+
+        @JsonProperty("organization_id")
+        @NotNull
+        val organizationId: Long
 )
