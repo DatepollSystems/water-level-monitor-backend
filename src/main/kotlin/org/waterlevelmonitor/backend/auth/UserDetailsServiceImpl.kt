@@ -9,10 +9,10 @@ import org.waterlevelmonitor.backend.domain.UserRepository
 import java.util.*
 
 @Component
-class UserDetailsServiceImpl(private val userRepository: UserRepository) : UserDetailsService{
+class UserDetailsServiceImpl(private val userRepository: UserRepository) : UserDetailsService {
     override fun loadUserByUsername(username: String): UserDetails {
         val user = userRepository.findUserByUsername(username)
-        if (user == null){
+        if (user == null) {
             throw UsernameNotFoundException(username)
         } else {
             return User(user.username, user.password, Collections.emptyList())

@@ -8,24 +8,24 @@ import javax.validation.constraints.Size
 @Table(name = "rivers")
 @Entity
 data class River(
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long,
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long,
 
-        @Column(nullable = false, length = 100)
-        @Size(min = 1, max = 100)
-        var name: String,
+    @Column(nullable = false, length = 100)
+    @Size(min = 1, max = 100)
+    var name: String,
 
-        @JsonIgnore
-        @OneToMany(fetch = FetchType.EAGER)
-        @JoinColumn(name = "river_id")
-        val locations: List<Location> = ArrayList(),
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "river_id")
+    val locations: List<Location> = ArrayList(),
 
-        @JsonIgnore
-        @Version
-        val version: Long? = null
+    @JsonIgnore
+    @Version
+    val version: Long? = null
 )
 
 data class RiverDto(
-        var name: String?
+    var name: String?
 )

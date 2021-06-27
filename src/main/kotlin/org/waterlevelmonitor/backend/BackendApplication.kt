@@ -29,6 +29,6 @@ class BackendApplication {
 
     @Bean
     fun bCrypt(): BCryptPasswordEncoder{
-        return BCryptPasswordEncoder();
+        return BCryptPasswordEncoder()
     }
 }

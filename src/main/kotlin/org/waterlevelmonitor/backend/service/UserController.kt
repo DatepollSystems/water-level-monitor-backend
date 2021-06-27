@@ -20,12 +20,11 @@ class UserController(val bCryptPasswordEncoder: BCryptPasswordEncoder, val userR
     @Value("\${user.creation.token}")
     var creationToken: String = ""
 
-
     @PostMapping("/signup")
-    fun signup(@RequestBody u: UserDto){
+    fun signup(@RequestBody u: UserDto) {
         val valid = creationEnabled.toBoolean()
 
-        if(valid && u.creationToken == creationToken){
+        if (valid && u.creationToken == creationToken) {
             val user = u.toDbModel()
             user.password = bCryptPasswordEncoder.encode(user.password)
             userRepository.save(user)

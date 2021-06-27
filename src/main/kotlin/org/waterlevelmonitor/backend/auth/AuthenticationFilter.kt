@@ -9,7 +9,6 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import java.io.IOException
-import java.lang.RuntimeException
 import java.util.*
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
@@ -37,11 +36,15 @@ class AuthenticationFilter(
     override fun successfulAuthentication(request: HttpServletRequest?, response: HttpServletResponse?, chain: FilterChain?, authResult: Authentication?) {
         val token = Jwts.builder()
                 .setSubject((authResult!!.principal as User).username)
-                // Expiration necessary?
                 .setExpiration(Date(System.currentTimeMillis() + 864_000_000))
                 .signWith(SignatureAlgorithm.HS512, "SecretKeyToGenJWTs".toByteArray())
                 .compact()
         response!!.addHeader("Authorization", "Bearer $token")
-        // maybe add in body too?
+
+        val responseToClient = "{ \"token\": \"$token\" }"
+
+        response.status = HttpServletResponse.SC_OK
+        response.writer.write(responseToClient)
+        response.writer.flush()
     }
 }

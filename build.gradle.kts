@@ -30,6 +30,7 @@ dependencies {
     implementation("org.hibernate:hibernate-core:5.4.30.Final")
     implementation("com.h2database:h2:1.4.200")
     implementation("org.slf4j:slf4j-api:1.7.30")
+    implementation("com.helger.commons:ph-commons:10.1.2")
 
     runtimeOnly("mysql:mysql-connector-java")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {

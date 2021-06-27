@@ -32,10 +32,12 @@ data class Location(
         @JoinColumn(name = "location_id")
         val waterLevels: List<WaterLevel> = ArrayList(),
 
-
         @ManyToOne
         @JoinColumn(name = "organization_id")
         val organizations: Organization,
+
+        @Column(name = "is_public")
+        var isPublic: Boolean = false,
 
         @JsonIgnore
         @Version
