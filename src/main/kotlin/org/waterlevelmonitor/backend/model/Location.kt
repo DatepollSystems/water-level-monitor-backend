@@ -36,7 +36,8 @@ data class Location(
         @JoinColumn(name = "organization_id")
         val organizations: Organization,
 
-        @Column(name = "is_public", nullable = false)
+
+        @Column(name = "is_public", nullable = false, columnDefinition = "boolean default false")
         var isPublic: Boolean = false,
 
         @JsonIgnore

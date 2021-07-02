@@ -2,5 +2,3 @@
 #   service configuration
 #---------------------------------------------------
 spring.profiles.active=container
-user.creation.enabled=true
-user.creation.token=anytoken

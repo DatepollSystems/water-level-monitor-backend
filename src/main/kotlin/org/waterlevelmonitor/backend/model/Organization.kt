@@ -25,7 +25,7 @@ data class Organization(
     @Column(name = "name", nullable = true)
     var name: String = "",
 
-    @Column(name = "is_public", nullable = false)
+    @Column(name = "is_public", nullable = false, columnDefinition = "boolean default false")
     var isPublic: Boolean = false,
 
     @OneToMany
