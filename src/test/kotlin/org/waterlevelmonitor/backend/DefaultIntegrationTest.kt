@@ -10,10 +10,9 @@ import org.springframework.web.client.RestTemplate
 
 @ActiveProfiles(profiles = ["test"])
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-class DefaultIntegrationTest {
-
-    @Autowired
-    lateinit var buildProperties: BuildProperties
+class DefaultIntegrationTest @Autowired constructor(
+    private val buildProperties: BuildProperties
+) {
 
     val requestURL = "http://127.0.0.1:8181"
 

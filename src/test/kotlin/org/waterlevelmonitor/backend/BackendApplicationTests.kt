@@ -9,7 +9,7 @@ import org.springframework.test.context.ActiveProfiles
 import org.waterlevelmonitor.backend.domain.RiverRepository
 
 @ActiveProfiles(profiles = ["test"])
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class BackendApplicationTests @Autowired constructor (
     private val repo: RiverRepository
 ) {
