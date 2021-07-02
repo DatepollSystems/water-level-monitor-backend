@@ -18,6 +18,6 @@ class BackendApplicationTests @Autowired constructor (
 
     @Test
     fun contextLoads() {
-        assertEquals("Donau", repo.getOne(1L).name)
+        assertEquals("Donau", repo.getRiverById(1L)?.name)
     }
 }

@@ -24,7 +24,7 @@ data class Location(
 
         @JsonIgnore
         @ManyToOne
-        @JoinColumn(name = "river_id")
+        @JoinColumn(name = "river_id", nullable = false)
         var river: River,
 
         @JsonIgnore
@@ -36,7 +36,7 @@ data class Location(
         @JoinColumn(name = "organization_id")
         val organizations: Organization,
 
-        @Column(name = "is_public")
+        @Column(name = "is_public", nullable = false)
         var isPublic: Boolean = false,
 
         @JsonIgnore
