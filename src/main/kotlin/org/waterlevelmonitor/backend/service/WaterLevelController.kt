@@ -121,7 +121,6 @@ class WaterLevelController(
         val currentStartMin = LocalDateTime.now().plusHours(2).withSecond(0)
         val currentEndMin = LocalDateTime.from(currentStartMin).withSecond(59)
 
-
         val res = waterLevelRepository.getAllWaterLevelsBetweenDateTimes(
                 loc.id,
                 Date.from(currentStartMin.atZone(ZoneId.systemDefault()).toInstant()),
