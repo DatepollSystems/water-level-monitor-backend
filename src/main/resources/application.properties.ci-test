@@ -1,6 +1,0 @@
-#---------------------------------------------------
-#   service configuration
-#---------------------------------------------------
-spring.profiles.active=test
-user.creation.enabled=true
-user.creation.token=anytoken
