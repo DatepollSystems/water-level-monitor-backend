@@ -1,0 +1,2120 @@
+{
+  "info": {
+    "_postman_id": "5bbe2a3d-6103-4f3f-a8d3-528009ae26f0",
+    "name": "WaterLevelMonitor API",
+    "description": "WaterLevelMonitor API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "17948697"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "auth",
+          "item": [
+            {
+              "name": "Login",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"admin@wlm.org\",\n    \"password\": \"admin\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"email\": \"admin@wlm.org\",\n    \"password\": \"admin\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/login",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "login"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Engine",
+                      "value": "Ktor"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Sat, 18 Jun 2022 13:33:04 GMT"
+                    },
+                    {
+                      "key": "Server",
+                      "value": "Ktor/2.0.2"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "319"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"accessToken\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhcGkud2xtLmxvY2FsIiwic3ViIjoiN2U5ZmI1MWU4NmEzM2YyNzA4OWM5Nzk0NTFjYTcxZmQiLCJpc3MiOiJhcGkud2xtLmxvY2FsIiwiZXhwIjoxNjU1NTYyNzg0fQ.1OScaWhjsBBswgBUVVAidujMqsZuS3HZ_x4f_ngIamM\",\n    \"refreshToken\": \"f74e640830d5d6a56bc26093c5d25ccd7fdd337dc428bcff9ed2f817b4d96c72\"\n}"
+                },
+                {
+                  "name": "Wrong credentials",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"email\": \"admin@wlm.org\",\n    \"password\": \"wrong\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/login",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "login"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "WWW-Authenticate",
+                      "value": "Bearer"
+                    },
+                    {
+                      "key": "X-Engine",
+                      "value": "Ktor"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Sat, 18 Jun 2022 13:34:34 GMT"
+                    },
+                    {
+                      "key": "Server",
+                      "value": "Ktor/2.0.2"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "17"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "\"Bad credentials\""
+                }
+              ]
+            },
+            {
+              "name": "Refresh token",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"refreshToken\":\"f74e640830d5d6a56bc26093c5d25ccd7fdd337dc428bcff9ed2f817b4d96c72\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/refresh",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "refresh"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"refreshToken\":\"f74e640830d5d6a56bc26093c5d25ccd7fdd337dc428bcff9ed2f817b4d96c72\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/refresh",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "refresh"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Engine",
+                      "value": "Ktor"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Sat, 18 Jun 2022 13:35:51 GMT"
+                    },
+                    {
+                      "key": "Server",
+                      "value": "Ktor/2.0.2"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "319"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"accessToken\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhcGkud2xtLmxvY2FsIiwic3ViIjoiN2U5ZmI1MWU4NmEzM2YyNzA4OWM5Nzk0NTFjYTcxZmQiLCJpc3MiOiJhcGkud2xtLmxvY2FsIiwiZXhwIjoxNjU1NTYyOTUxfQ.UM04W5QPrmYe7TFh0UzH8cwh9U8QTRuFsQjK-QlK2-E\",\n    \"refreshToken\": \"8a582d04149b333679b062347e6c21cae8426553b5e6cc391dfdfcd5adc7cd31\"\n}"
+                },
+                {
+                  "name": "Invalid token",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"refreshToken\":\"wrong token\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/refresh",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "refresh"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "WWW-Authenticate",
+                      "value": "Bearer"
+                    },
+                    {
+                      "key": "X-Engine",
+                      "value": "Ktor"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Sat, 18 Jun 2022 13:36:13 GMT"
+                    },
+                    {
+                      "key": "Server",
+                      "value": "Ktor/2.0.2"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "22"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "\"Invalid refreshToken\""
+                }
+              ]
+            },
+            {
+              "name": "Verify auth",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/auth/verify",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "verify"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/verify",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "verify"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "plain",
+                  "header": [
+                    {
+                      "key": "X-Engine",
+                      "value": "Ktor"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Sat, 18 Jun 2022 13:38:13 GMT"
+                    },
+                    {
+                      "key": "Server",
+                      "value": "Ktor/2.0.2"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "0"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": null
+                },
+                {
+                  "name": "Invalid auth",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/verify",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "verify"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "plain",
+                  "header": [
+                    {
+                      "key": "X-Engine",
+                      "value": "Ktor"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Sat, 18 Jun 2022 13:38:41 GMT"
+                    },
+                    {
+                      "key": "Server",
+                      "value": "Ktor/2.0.2"
+                    },
+                    {
+                      "key": "WWW-Authenticate",
+                      "value": "Bearer realm=realm"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "0"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": null
+                }
+              ]
+            }
+          ],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "locations",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "GET Location",
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/locations/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "locations",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "c4a5fdc8237756c74a2fd172d4f8cf4d"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/locations/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "locations",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "c4a5fdc8237756c74a2fd172d4f8cf4d"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "X-Engine",
+                          "value": "Ktor"
+                        },
+                        {
+                          "key": "Date",
+                          "value": "Sat, 18 Jun 2022 13:52:03 GMT"
+                        },
+                        {
+                          "key": "Server",
+                          "value": "Ktor/2.0.2"
+                        },
+                        {
+                          "key": "Content-Length",
+                          "value": "129"
+                        },
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "key": "Connection",
+                          "value": "keep-alive"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n    \"_id\": \"c4a5fdc8237756c74a2fd172d4f8cf4d\",\n    \"name\": \"Some Location\",\n    \"city\": \"Some City\",\n    \"waterId\": \"4c38c6296c11f842dc68877367bc00a5\"\n}"
+                    }
+                  ]
+                },
+                {
+                  "name": "DELETE Location",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/locations/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "locations",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "c4a5fdc8237756c74a2fd172d4f8cf4d"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/locations/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "locations",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "c4a5fdc8237756c74a2fd172d4f8cf4d"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "plain",
+                      "header": [
+                        {
+                          "key": "X-Engine",
+                          "value": "Ktor"
+                        },
+                        {
+                          "key": "Date",
+                          "value": "Sat, 18 Jun 2022 13:52:42 GMT"
+                        },
+                        {
+                          "key": "Server",
+                          "value": "Ktor/2.0.2"
+                        },
+                        {
+                          "key": "Connection",
+                          "value": "keep-alive"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": null
+                    }
+                  ]
+                },
+                {
+                  "name": "GET Location measurements",
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/locations/:id/measurements",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "locations",
+                        ":id",
+                        "measurements"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "c4a5fdc8237756c74a2fd172d4f8cf4d"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/locations/:id/measurements",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "locations",
+                            ":id",
+                            "measurements"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "c4a5fdc8237756c74a2fd172d4f8cf4d"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "X-Engine",
+                          "value": "Ktor"
+                        },
+                        {
+                          "key": "Date",
+                          "value": "Sat, 18 Jun 2022 13:51:11 GMT"
+                        },
+                        {
+                          "key": "Server",
+                          "value": "Ktor/2.0.2"
+                        },
+                        {
+                          "key": "Content-Length",
+                          "value": "282"
+                        },
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "key": "Connection",
+                          "value": "keep-alive"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "[\n    {\n        \"_id\": \"e5d927178dfeb4506f3c17550d756de0\",\n        \"value\": 10,\n        \"unit\": \"m\",\n        \"locationId\": \"c4a5fdc8237756c74a2fd172d4f8cf4d\",\n        \"timestamp\": 1655500000000\n    },\n    {\n        \"_id\": \"28561e61707746e9dde5b64c4fcc847b\",\n        \"value\": 9,\n        \"unit\": \"m\",\n        \"locationId\": \"c4a5fdc8237756c74a2fd172d4f8cf4d\",\n        \"timestamp\": 1655559968753\n    }\n]"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "GET Locations",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/locations",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "locations"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/locations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "locations"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Engine",
+                      "value": "Ktor"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Sat, 18 Jun 2022 13:46:52 GMT"
+                    },
+                    {
+                      "key": "Server",
+                      "value": "Ktor/2.0.2"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "1003"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n    {\n        \"_id\": \"29b4c9c142f9d79de9142330b7b1474f\",\n        \"name\": \"Test Location\",\n        \"city\": \"Sample City\",\n        \"waterId\": \"4c38c6296c11f842dc68877367bc00a5\"\n    },\n    {\n        \"_id\": \"c4a5fdc8237756c74a2fd172d4f8cf4d\",\n        \"name\": \"Some Location\",\n        \"city\": \"Some City\",\n        \"waterId\": \"4c38c6296c11f842dc68877367bc00a5\"\n    }\n]"
+                }
+              ]
+            },
+            {
+              "name": "UPDATE Location",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"_id\": \"29b4c9c142f9d79de9142330b7b1474f\",\n    \"name\": \"Test Location updated\",\n    \"city\": \"Sample City\",\n    \"waterId\": \"4c38c6296c11f842dc68877367bc00a5\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/locations",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "locations"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"_id\": \"29b4c9c142f9d79de9142330b7b1474f\",\n    \"name\": \"Test Location updated\",\n    \"city\": \"Sample City\",\n    \"waterId\": \"4c38c6296c11f842dc68877367bc00a5\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/locations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "locations"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Engine",
+                      "value": "Ktor"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Sat, 18 Jun 2022 13:49:02 GMT"
+                    },
+                    {
+                      "key": "Server",
+                      "value": "Ktor/2.0.2"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "139"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"_id\": \"29b4c9c142f9d79de9142330b7b1474f\",\n    \"name\": \"Test Location updated\",\n    \"city\": \"Sample City\",\n    \"waterId\": \"4c38c6296c11f842dc68877367bc00a5\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "CREATE Location",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"Some Location\",\n    \"city\": \"Some City\",\n    \"waterId\": \"4c38c6296c11f842dc68877367bc00a5\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/locations",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "locations"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"name\": \"Some Location\",\n    \"city\": \"Some City\",\n    \"waterId\": \"4c38c6296c11f842dc68877367bc00a5\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/locations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "locations"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Engine",
+                      "value": "Ktor"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Sat, 18 Jun 2022 13:43:00 GMT"
+                    },
+                    {
+                      "key": "Server",
+                      "value": "Ktor/2.0.2"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "129"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"_id\": \"c4a5fdc8237756c74a2fd172d4f8cf4d\",\n    \"name\": \"Some Location\",\n    \"city\": \"Some City\",\n    \"waterId\": \"4c38c6296c11f842dc68877367bc00a5\"\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "measurements",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "GET Measurement",
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/measurements/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "measurements",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "e5d927178dfeb4506f3c17550d756de0"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/measurements/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "measurements",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "e5d927178dfeb4506f3c17550d756de0"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "X-Engine",
+                          "value": "Ktor"
+                        },
+                        {
+                          "key": "Date",
+                          "value": "Sat, 18 Jun 2022 13:55:41 GMT"
+                        },
+                        {
+                          "key": "Server",
+                          "value": "Ktor/2.0.2"
+                        },
+                        {
+                          "key": "Content-Length",
+                          "value": "140"
+                        },
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "key": "Connection",
+                          "value": "keep-alive"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n    \"_id\": \"e5d927178dfeb4506f3c17550d756de0\",\n    \"value\": 10.1,\n    \"unit\": \"m\",\n    \"locationId\": \"c4a5fdc8237756c74a2fd172d4f8cf4d\",\n    \"timestamp\": 1655500000100\n}"
+                    }
+                  ]
+                },
+                {
+                  "name": "DELETE Measurement",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/measurements/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "measurements",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "e5d927178dfeb4506f3c17550d756de0"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/measurements/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "measurements",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "e5d927178dfeb4506f3c17550d756de0"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "plain",
+                      "header": [
+                        {
+                          "key": "X-Engine",
+                          "value": "Ktor"
+                        },
+                        {
+                          "key": "Date",
+                          "value": "Sat, 18 Jun 2022 14:00:34 GMT"
+                        },
+                        {
+                          "key": "Server",
+                          "value": "Ktor/2.0.2"
+                        },
+                        {
+                          "key": "Connection",
+                          "value": "keep-alive"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": null
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "GET Measurements",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/measurements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "measurements"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/measurements",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "measurements"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Engine",
+                      "value": "Ktor"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Sat, 18 Jun 2022 13:53:17 GMT"
+                    },
+                    {
+                      "key": "Server",
+                      "value": "Ktor/2.0.2"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "1344"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n    {\n        \"_id\": \"e5d927178dfeb4506f3c17550d756de0\",\n        \"value\": 10,\n        \"unit\": \"m\",\n        \"locationId\": \"c4a5fdc8237756c74a2fd172d4f8cf4d\",\n        \"timestamp\": 1655500000000\n    },\n    {\n        \"_id\": \"28561e61707746e9dde5b64c4fcc847b\",\n        \"value\": 9,\n        \"unit\": \"m\",\n        \"locationId\": \"c4a5fdc8237756c74a2fd172d4f8cf4d\",\n        \"timestamp\": 1655559968753\n    }\n]"
+                }
+              ]
+            },
+            {
+              "name": "UPDATE Measurement",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"_id\": \"e5d927178dfeb4506f3c17550d756de0\",\n    \"value\": 10.1,\n    \"unit\": \"m\",\n    \"locationId\": \"c4a5fdc8237756c74a2fd172d4f8cf4d\",\n    \"timestamp\": 1655500000100\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/measurements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "measurements"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"_id\": \"e5d927178dfeb4506f3c17550d756de0\",\n    \"value\": 10.1,\n    \"unit\": \"m\",\n    \"locationId\": \"c4a5fdc8237756c74a2fd172d4f8cf4d\",\n    \"timestamp\": 1655500000100\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/measurements",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "measurements"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Engine",
+                      "value": "Ktor"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Sat, 18 Jun 2022 13:54:30 GMT"
+                    },
+                    {
+                      "key": "Server",
+                      "value": "Ktor/2.0.2"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "140"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"_id\": \"e5d927178dfeb4506f3c17550d756de0\",\n    \"value\": 10.1,\n    \"unit\": \"m\",\n    \"locationId\": \"c4a5fdc8237756c74a2fd172d4f8cf4d\",\n    \"timestamp\": 1655500000100\n}"
+                },
+                {
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"_id\": \"NonExisting\",\n    \"value\": 10.1,\n    \"unit\": \"m\",\n    \"locationId\": \"c4a5fdc8237756c74a2fd172d4f8cf4d\",\n    \"timestamp\": 1655500000100\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/measurements",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "measurements"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "plain",
+                  "header": [
+                    {
+                      "key": "X-Engine",
+                      "value": "Ktor"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Sat, 18 Jun 2022 13:55:00 GMT"
+                    },
+                    {
+                      "key": "Server",
+                      "value": "Ktor/2.0.2"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "0"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": null
+                }
+              ]
+            },
+            {
+              "name": "ADD Measurement",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"value\": 9,\n    \"unit\": \"m\",\n    \"locationId\": \"c4a5fdc8237756c74a2fd172d4f8cf4d\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/measurements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "measurements"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Add Measurement (with timestamp)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"value\": 10,\n    \"unit\": \"m\",\n    \"locationId\": \"c4a5fdc8237756c74a2fd172d4f8cf4d\",\n    \"timestamp\": 1655500000000\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/measurements",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "measurements"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Engine",
+                      "value": "Ktor"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Sat, 18 Jun 2022 13:45:35 GMT"
+                    },
+                    {
+                      "key": "Server",
+                      "value": "Ktor/2.0.2"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "140"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"_id\": \"e5d927178dfeb4506f3c17550d756de0\",\n    \"value\": 10,\n    \"unit\": \"m\",\n    \"locationId\": \"c4a5fdc8237756c74a2fd172d4f8cf4d\",\n    \"timestamp\": 1655500000000\n}"
+                },
+                {
+                  "name": "Add Measurement (without timestamp)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"value\": 9,\n    \"unit\": \"m\",\n    \"locationId\": \"c4a5fdc8237756c74a2fd172d4f8cf4d\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/measurements",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "measurements"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Engine",
+                      "value": "Ktor"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Sat, 18 Jun 2022 13:46:08 GMT"
+                    },
+                    {
+                      "key": "Server",
+                      "value": "Ktor/2.0.2"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "139"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"_id\": \"28561e61707746e9dde5b64c4fcc847b\",\n    \"value\": 9,\n    \"unit\": \"m\",\n    \"locationId\": \"c4a5fdc8237756c74a2fd172d4f8cf4d\",\n    \"timestamp\": 1655559968753\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "waters",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "GET Water",
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/waters/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "waters",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "4c38c6296c11f842dc68877367bc00a5"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/waters/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "waters",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "4c38c6296c11f842dc68877367bc00a5"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "X-Engine",
+                          "value": "Ktor"
+                        },
+                        {
+                          "key": "Date",
+                          "value": "Sat, 18 Jun 2022 13:59:55 GMT"
+                        },
+                        {
+                          "key": "Server",
+                          "value": "Ktor/2.0.2"
+                        },
+                        {
+                          "key": "Content-Length",
+                          "value": "70"
+                        },
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "key": "Connection",
+                          "value": "keep-alive"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n    \"_id\": \"4c38c6296c11f842dc68877367bc00a5\",\n    \"name\": \"Some Water Updated\"\n}"
+                    }
+                  ]
+                },
+                {
+                  "name": "GET Water locations",
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/waters/:id/locations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "waters",
+                        ":id",
+                        "locations"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "4c38c6296c11f842dc68877367bc00a5"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/waters/:id/locations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "waters",
+                            ":id",
+                            "locations"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "4c38c6296c11f842dc68877367bc00a5"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "X-Engine",
+                          "value": "Ktor"
+                        },
+                        {
+                          "key": "Date",
+                          "value": "Sat, 18 Jun 2022 13:59:35 GMT"
+                        },
+                        {
+                          "key": "Server",
+                          "value": "Ktor/2.0.2"
+                        },
+                        {
+                          "key": "Content-Length",
+                          "value": "141"
+                        },
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "key": "Connection",
+                          "value": "keep-alive"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "[\n    {\n        \"_id\": \"29b4c9c142f9d79de9142330b7b1474f\",\n        \"name\": \"Test Location updated\",\n        \"city\": \"Sample City\",\n        \"waterId\": \"4c38c6296c11f842dc68877367bc00a5\"\n    }\n]"
+                    }
+                  ]
+                },
+                {
+                  "name": "DELETE Water",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/waters/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "waters",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "7d051fff7d1833bad0cd7be425d529a0"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/waters/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "waters",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "7d051fff7d1833bad0cd7be425d529a0"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "plain",
+                      "header": [
+                        {
+                          "key": "X-Engine",
+                          "value": "Ktor"
+                        },
+                        {
+                          "key": "Date",
+                          "value": "Sat, 18 Jun 2022 13:59:01 GMT"
+                        },
+                        {
+                          "key": "Server",
+                          "value": "Ktor/2.0.2"
+                        },
+                        {
+                          "key": "Connection",
+                          "value": "keep-alive"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": null
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "GET Waters",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/waters",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "waters"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/waters",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "waters"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Engine",
+                      "value": "Ktor"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Sat, 18 Jun 2022 13:58:09 GMT"
+                    },
+                    {
+                      "key": "Server",
+                      "value": "Ktor/2.0.2"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "1374"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n    {\n        \"_id\": \"6e1d542b2fc34ca32d208c625cac5701\",\n        \"name\": \"TestWater\"\n    },\n    {\n        \"_id\": \"4c38c6296c11f842dc68877367bc00a5\",\n        \"name\": \"Some Water Updated\"\n    }\n]"
+                }
+              ]
+            },
+            {
+              "name": "UPDATE Water",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"_id\": \"4c38c6296c11f842dc68877367bc00a5\",\n    \"name\": \"Some Water Updated\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/waters",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "waters"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"_id\": \"4c38c6296c11f842dc68877367bc00a5\",\n    \"name\": \"Some Water Updated\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/waters",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "waters"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Engine",
+                      "value": "Ktor"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Sat, 18 Jun 2022 13:57:18 GMT"
+                    },
+                    {
+                      "key": "Server",
+                      "value": "Ktor/2.0.2"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "70"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"_id\": \"4c38c6296c11f842dc68877367bc00a5\",\n    \"name\": \"Some Water Updated\"\n}"
+                },
+                {
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"_id\": \"NonExisting\",\n    \"name\": \"Some Water Updated\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/waters",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "waters"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "plain",
+                  "header": [
+                    {
+                      "key": "X-Engine",
+                      "value": "Ktor"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Sat, 18 Jun 2022 13:57:38 GMT"
+                    },
+                    {
+                      "key": "Server",
+                      "value": "Ktor/2.0.2"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "0"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": null
+                }
+              ]
+            },
+            {
+              "name": "CREATE Water",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"Some Water\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/waters",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "waters"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"name\": \"Some Water\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/waters",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "waters"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Engine",
+                      "value": "Ktor"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Sat, 18 Jun 2022 13:42:13 GMT"
+                    },
+                    {
+                      "key": "Server",
+                      "value": "Ktor/2.0.2"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "62"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"_id\": \"4c38c6296c11f842dc68877367bc00a5\",\n    \"name\": \"Some Water\"\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "GET api",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "plain",
+              "header": [
+                {
+                  "key": "X-Engine",
+                  "value": "Ktor"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 18 Jun 2022 13:24:04 GMT"
+                },
+                {
+                  "key": "Server",
+                  "value": "Ktor/2.0.2"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "48"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain; charset=UTF-8"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                }
+              ],
+              "cookie": [],
+              "body": "Running WaterLevelMonitor-API! ( ͡° ͜ʖ ͡°)"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhcGkud2xtLmxvY2FsIiwic3ViIjoiN2U5ZmI1MWU4NmEzM2YyNzA4OWM5Nzk0NTFjYTcxZmQiLCJpc3MiOiJhcGkud2xtLmxvY2FsIiwiZXhwIjoxNjU1NTYyOTUxfQ.UM04W5QPrmYe7TFh0UzH8cwh9U8QTRuFsQjK-QlK2-E",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "localhost:8080",
+      "type": "string"
+    }
+  ]
+}
