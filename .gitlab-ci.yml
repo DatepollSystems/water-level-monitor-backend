@@ -1,0 +1,19 @@
+stages:
+  - test
+
+e2e-test-job:
+  image: openjdk:17-jdk-slim
+  stage: test
+  before_script:
+    - apt-get update
+    - apt-get -y install bc
+  script:
+    - ./gradlew clean test koverXmlReport
+    - echo -n "Total-Coverage-" && tail -n10 build/reports/kover/project-xml/report.xml | grep INSTRUCTION | sed 's/.*missed="\(.*\)" covered="\(.*\)".*/scale=scale(0.01)\;(\2 * 100) \/ (\2 + \1)/' | bc
+  variables:
+    DB_URI: $DB_URI
+  artifacts:
+    when: always
+    reports:
+      junit: build/test-results/test/**/TEST-*.xml
+  coverage: '/Total-Coverage-(\d+\.\d+)/'
