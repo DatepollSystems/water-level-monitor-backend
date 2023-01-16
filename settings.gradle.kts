@@ -1,1 +1,1 @@
-rootProject.name = "water-level-monitor"
+rootProject.name = "WaterLevelMonitor"
