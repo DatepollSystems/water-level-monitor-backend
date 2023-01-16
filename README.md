@@ -1,6 +1,4 @@
 # Water Level Monitor
-[![coverage report](https://git-iit.fh-joanneum.at/kauerale20/water-level-monitor/badges/main/coverage.svg)](https://git-iit.fh-joanneum.at/kauerale20/water-level-monitor/-/commits/main)
-[![test status](https://git-iit.fh-joanneum.at/kauerale20/water-level-monitor/badges/main/pipeline.svg)](https://git-iit.fh-joanneum.at/kauerale20/water-level-monitor/-/commits/main)
 ## About
 
 Water Level Monitor is an ReST Full Api for logging of water levels.
